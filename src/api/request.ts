@@ -4,9 +4,11 @@
 import axios from 'axios'
 import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
+const serverAddress = 'http://localhost:8080'
+
 // 创建 Axios 实例
 const request = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: `${serverAddress}/api`,
     timeout: 15000
 })
 
@@ -51,6 +53,5 @@ export function getPosterUrl(path?: string): string {
     if (!path) return '';
     if (path.startsWith('http')) return path;
 
-    const baseURL = request.defaults.baseURL;
-    return `${baseURL}/poster/${path}`;
+    return `${serverAddress}/poster/${path}`;
 }
