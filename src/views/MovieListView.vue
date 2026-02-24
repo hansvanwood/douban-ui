@@ -212,7 +212,7 @@ const skeletonCount = 12
           <input
             v-model="filters.keyword"
             type="text"
-            placeholder="搜索电影名..."
+            placeholder="电影名/演员/导演"
             class="filter-input"
             @input="handleKeywordInput"
           />
