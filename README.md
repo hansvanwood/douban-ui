@@ -1,42 +1,77 @@
-# douban-ui
+# 🎬 豆瓣酱 (Douban-UI)
 
-This template should help get you started developing with Vue 3 in Vite.
+豆瓣酱是一个基于 Vue 3 + Vite 的电影展示与查询网站。它的界面设计灵感来源于 Emby 媒体服务器，采用深色背景、现代化卡片式布局以及沉浸式的视觉体验。
 
-## Recommended IDE Setup
+## 🛠️ 技术栈与环境
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **框架**: Vue 3 (Composition API)
+- **路由**: Vue Router 4
+- **状态管理**: Pinia
+- **网络请求**: Axios
+- **构建工具**: Vite
+- **Node 版本**: >= 20.19.0 (推荐 22.x)
+- **包管理器**: npm
 
-## Recommended Browser Setup
+## ✨ 主要功能
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+1. **首页 (`/`)**: 沉浸式大屏展示，包含动态递增（CountUp）统计数据卡片。
+2. **电影发现与列表 (`/movies`)**: 
+   - 包含多维度筛选（按类型、语言、地区、年份、时长等）。
+   - 丰富的排序选项，URL 参数状态双向同步，方便书签和分享。
+3. **电影详情页面 (`/movies/:movieId`)**: 
+   - 海报大图和模糊背景视觉错层设计。
+   - 展示详细的电影信息、评分、演职人员及翻页评论。
+4. **影人详情页 (`/workers/:workerId`)**:
+   - 展示导演/演员的个人资料信息，并展示其相关的电影作品集。
+5. **完备的异常处理**:
+   - 包含定制过的 `404 Not Found` 内容页以及拦截器统一导向的 `500 Server Error` 页面，处理各种异常。
 
-## Type Support for `.vue` Imports in TS
+## 🚀 快速开始
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### 1. 安装依赖
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 2. 本地化开发
 
-```sh
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+> **注意：** 默认配置下，前端应用启动并监听开发端口（通常为 `http://localhost:5173/`）。应用强依赖本地/远程后端提供数据，其基础 API 路径 (Base URL) 默认指向 `http://localhost:8080/api`。
 
-```sh
+### 3. 类型检查与生产建构
+
+```bash
 npm run build
 ```
+执行此命令会先拉起 TypeScript 类型检查（`vue-tsc`），通过后再由 Vite 把静态资源打包输出至 `dist/` 目录中。
+
+## 📁 目录结构
+
+```text
+src/
+├── api/            # HTTP 请求封装、拦截器配置与各项接口定义
+├── assets/         # 样式文件（含主界面全局深色 CSS 变量）及公共媒体资源
+├── components/     # 全局复用组件，如导览列、电影海报卡片、评分图示等
+├── router/         # Vue Router 全局路由与视图映射
+├── stores/         # Pinia 数据仓库 (枚举字典持久化和条件暂存)
+├── views/          # 应用路由层面顶级展示视图
+└── main.ts         # 前端根入口，注入各种插件
+```
+
+## 📝 开发约定
+
+### 样式与实现考量
+- 项目直接使用原生 CSS 变量搭建定制主题，**完全不依赖大型 UI 库**。主打绿色强调色 (`#60A84E`) 和无边界暗黑模式搭配 (`#141414`)。
+- 图片与接口异常拥有友好占位和容错防空策略。
+
+### Git 提交规范
+本项目执行严谨的 **Conventional Commits** 标准。
+
+更全面的约束规章定义在了 `doc/commit-convention.md` 中。推荐提交前执行 `npm run commit` 协助规范化验证。
+
+---
+© 2026 豆瓣酱. 全栈技术展示.
